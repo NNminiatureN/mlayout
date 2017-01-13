@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>H5拖拽</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background: orange;
+        }
+        .out{
+            width: 500px;
+            height: 500px;
+            border:1px solid #73C5E7;
+            position: absolute;
+            bottom:0;
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" draggable="true"></div>
+<textarea name="" id="text" cols="30" rows="20"></textarea>
+<div class="out"></div>
+<p>新加</p>
+</body>
+</html>
+<script>
+    var box=document.querySelector('.box');
+    var out=document.querySelector('.out');
+    var text=document.querySelector('#text');
+    box.addEventListener('dragstart',function(){
+        text.innerHTML+='开始拖拽\n';
+    })
+    box.addEventListener('drag',function(){
+//        text.innerHTML+='拖拽中。。。';
+//        this.style.background='rgb(0,0,0)';
+        this.style.background='rgb(Math.random()*255+1,Math.random()*255+1,Math.random()*255+1)';
+    })
+    box.addEventListener('dragend',function(){
+        text.innerHTML+='拖拽结束\n';
+    })
+    out.addEventListener('dragenter',function(){
+        text.innerHTML+='进入投放区\n';
+    })
+    out.addEventListener('dragover',function(e){
+        e.preventDefault();
+//        text.innerHTML+='在投放区\n';
+    })
+    out.addEventListener('dragleave',function(){
+        text.innerHTML+='离开投放区\n';
+    })
+    out.addEventListener('drop',function(){
+        text.innerHTML+='放下\n';
+        this.appendChild(box);
+    })
+</script>
